@@ -1,0 +1,70 @@
+version: '3'
+services:
+  redis:
+    image: redis:4.0.5-alpine
+    container_name: uni_redis_db
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    networks:
+      redis-net:
+        ipv4_address: 10.5.0.2
+    volumes:
+      - redis_volume_data:/data
+
+  insights:
+    image: redislabs/redisinsight
+    container_name: uni_redis_insights
+    ports:
+      - "8001:8001"
+    restart: on-failure
+    depends_on:
+      - graph
+      - search
+      - timeseries
+      - redis
+    volumes:
+      - redis_insight_volume_data:/db
+    networks:
+      redis-net:
+        ipv4_address: 10.5.0.3
+
+  graph:
+    image: redislabs/redisgraph
+    container_name: uni_redis_graph
+    ports:
+      - "6380:6379"
+    restart: on-failure
+    networks:
+      redis-net:
+        ipv4_address: 10.5.0.4
+
+  search:
+    image: redislabs/redisearch:latest
+    container_name: uni_redis_search
+    ports:
+      - "6381:6379"
+    restart: on-failure
+    networks:
+      redis-net:
+        ipv4_address: 10.5.0.5
+
+  timeseries:
+    image: redislabs/redistimeseries
+    container_name: uni_redis_timeseries
+    ports:
+      - "6382:6379"
+    restart: on-failure
+    networks:
+      redis-net:
+        ipv4_address: 10.5.0.6
+
+networks:
+  redis-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
+volumes:
+  redis_volume_data:
+  redis_insight_volume_data:
