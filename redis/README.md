@@ -16,7 +16,7 @@ redistimeseries | 6382
 
 ## Login no redis insight
 
-![Tela login](/_imgs/redis_insight.png.md.png)
+![Tela login](_imgs/redis_insight.png.md.png)
 
 ## Cheat Sheet
 
