@@ -16,9 +16,9 @@ redistimeseries | 6382
 
 ## Login no redis insight
 
-![Tela login](../_imgs/redis_insight.png)
+![Tela login](../../_imgs/redis_insight.png)
 
 ## Cheat Sheet
 
-- https://gist.github.com/LeCoupa/1596b8f359ad8812c7271b5322c30946
-- https://lzone.de/cheat-sheet/Redis
+unilink: https://gist.github.com/LeCoupa/1596b8f359ad8812c7271b5322c30946
+unilink: https://lzone.de/cheat-sheet/Redis

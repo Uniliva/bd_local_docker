@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  db_mysql:
+    image: mysql:5.7
+    container_name: db_mysql
+    volumes:
+      - db_mysql_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: unisenha
+      MYSQL_DATABASE: exemplo
+      MYSQL_USER: uni_user
+      MYSQL_PASSWORD: unisenha    
+    ports:
+      - '3306:3306'
+    networks: 
+      -  db_mysql_network
+
+networks:
+  postgre-db_mysql_network:
+    driver: bridge
+
+volumes:
+    db_mysql_data:

@@ -1,0 +1,24 @@
+version: '3.5'
+
+services:
+  db_oracle:
+    image: uniliva/oracle_db:12.2.0.1-se2
+    container_name: db_oracle_12
+    restart: always
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    volumes:
+      - db_oracle_data:/opt/oracle/oradata
+      - ./scripts:/opt/oracle/scripts/startup
+    environment:
+      ORACLE_PWD: "unisenha"
+    networks:
+      - db_oracle_network
+
+networks:
+  db_oracle_network:
+    driver: bridge
+
+volumes:
+  db_oracle_data:

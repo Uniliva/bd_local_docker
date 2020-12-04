@@ -1,0 +1,35 @@
+#versão do docker-compose
+version: '3.5'
+
+# Serve para definir os container que serão utilizado
+services:
+  # nome dado ao container para ficar legivel
+  db_sqlserver:
+    #comando de start do conatiner
+    build:
+      context: .  # serve para definir onde e o contexto onde se deve buscar o docker file
+      dockerfile: db/Dockerfile  # dockerfile para buildar a imagem
+    container_name: db_sqlserver
+    #Restart polices
+    restart: "no" # sempre reinicie 
+    environment:  # define as variaveis de ambiente
+      ACCEPT_EULA: Y  # ex de variavel utilizado pelo mssql
+      SA_PASSWORD: unisenha
+      MSSQL_PID: Express
+    ports: #define as portas de execução do container
+      - "1433:1433"  # ex de porta sendo <host>:<container>
+    volumes:
+      - db_sqlserver_data:/var/opt/mssql/data
+    networks: # define a rede que o container usara
+      -  db_sqlserver_network # nome da rede criada na sessão networks
+
+
+networks: # serve para definira as redes que os container criados podem utilizar
+    db_sqlserver_network:  # nome da rede a ser criado (pode ser qualquer nome)
+      driver: bridge   # definição da rede
+      ipam:
+        config:
+          - subnet: 192.167.0.0/16
+
+volumes:
+  db_sqlserver_data:
