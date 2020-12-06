@@ -1,5 +1,4 @@
 version: '3.5'
-
 services:
   db_mysql:
     image: mysql:5.7
@@ -16,9 +15,8 @@ services:
       - '3306:3306'
     networks: 
       -  db_mysql_network
-
 networks:
-  postgre-db_mysql_network:
+  db_mysql_network:
     driver: bridge
 
 volumes:
