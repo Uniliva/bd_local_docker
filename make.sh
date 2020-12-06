@@ -28,7 +28,9 @@ menu (){
                 done
             fi
         done
+        echo -e "------------| outros"
         echo -e "---| 0 ] Para sair"
+        echo "================================================"
         echo  "Digite a opção desejada:."
         read opc
 
