@@ -90,11 +90,12 @@ menu_docker(){
 
         case "$opc_docker" in
             1)
+                declare -a local=`pwd`
                 echo "Criando ou Iniciando banco de dados"
                 docker-compose up -d --build
                 echo "Banco criado ou iniciado"
                 echo "================================================"
-                echo "----> Para mais informações leia ${pasta_banco}README.md"
+                echo "----> Para mais informações leia ${local}/README.md"
                 echo "================================================"
                 break
             ;;
